@@ -13,9 +13,9 @@ namespace dad_ViziteuMihai
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class mihaiEntities : DbContext
+    public partial class databaseEntities : DbContext
     {
-        public mihaiEntities()
+        public databaseEntities()
             : base("name=mihaiEntities")
         {
         }

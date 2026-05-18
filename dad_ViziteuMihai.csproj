@@ -71,11 +71,17 @@
     <Compile Include="Cont.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBalanta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBalanta.Designer.cs">
+      <DependentUpon>frmBalanta.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmConturi.cs">
       <SubType>Form</SubType>
@@ -112,6 +118,15 @@
     <Compile Include="Rulaje.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\frmConturi.resx">
+      <DependentUpon>frmConturi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRulaje.resx">
+      <DependentUpon>frmRulaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -129,6 +144,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Cont.datasource" />
+    <None Include="Properties\DataSources\Operatie.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

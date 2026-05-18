@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace dad_ViziteuMihai
+namespace dad_ViziteuMihai.Forms
 {
-    public partial class Form1 : Form
+    public partial class frmBalanta : Form
     {
-        public Form1()
+        public frmBalanta()
         {
             InitializeComponent();
         }
