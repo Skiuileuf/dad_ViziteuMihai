@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cont">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Simbol" Type="nvarchar" MaxLength="16" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="255" />
+          <Property Name="SID" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="SIC" Type="decimal" Precision="16" Scale="4" />
+        </EntityType>
+        <EntityType Name="Operatie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numar" Type="int" />
+          <Property Name="Data" Type="date" />
+          <Property Name="Doc" Type="nvarchar" MaxLength="64" />
+          <Property Name="DataDoc" Type="date" />
+          <Property Name="Explicatie" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Rulaje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCont" Type="int" />
+          <Property Name="IdOperatie" Type="int" />
+          <Property Name="SumaD" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="SumaC" Type="decimal" Precision="16" Scale="4" />
+        </EntityType>
+        <Association Name="FK__Rulaje__IdCont__3B75D760">
+          <End Role="Cont" Type="Self.Cont" Multiplicity="0..1" />
+          <End Role="Rulaje" Type="Self.Rulaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cont">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rulaje">
+              <PropertyRef Name="IdCont" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rulaje__IdOperat__3C69FB99">
+          <End Role="Operatie" Type="Self.Operatie" Multiplicity="0..1" />
+          <End Role="Rulaje" Type="Self.Rulaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operatie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rulaje">
+              <PropertyRef Name="IdOperatie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="Cont" EntityType="Self.Cont" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operatie" EntityType="Self.Operatie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rulaje" EntityType="Self.Rulaje" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Rulaje__IdCont__3B75D760" Association="Self.FK__Rulaje__IdCont__3B75D760">
+            <End Role="Cont" EntitySet="Cont" />
+            <End Role="Rulaje" EntitySet="Rulaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rulaje__IdOperat__3C69FB99" Association="Self.FK__Rulaje__IdOperat__3C69FB99">
+            <End Role="Operatie" EntitySet="Operatie" />
+            <End Role="Rulaje" EntitySet="Rulaje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cont">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Simbol" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Denumire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="SIC" Type="Decimal" Precision="16" Scale="4" />
+          <NavigationProperty Name="Rulaje" Relationship="Self.FK__Rulaje__IdCont__3B75D760" FromRole="Cont" ToRole="Rulaje" />
+        </EntityType>
+        <EntityType Name="Operatie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numar" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Doc" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DataDoc" Type="DateTime" Precision="0" />
+          <Property Name="Explicatie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rulaje" Relationship="Self.FK__Rulaje__IdOperat__3C69FB99" FromRole="Operatie" ToRole="Rulaje" />
+        </EntityType>
+        <EntityType Name="Rulaje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCont" Type="Int32" />
+          <Property Name="IdOperatie" Type="Int32" />
+          <Property Name="SumaD" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="SumaC" Type="Decimal" Precision="16" Scale="4" />
+          <NavigationProperty Name="Cont" Relationship="Self.FK__Rulaje__IdCont__3B75D760" FromRole="Rulaje" ToRole="Cont" />
+          <NavigationProperty Name="Operatie" Relationship="Self.FK__Rulaje__IdOperat__3C69FB99" FromRole="Rulaje" ToRole="Operatie" />
+        </EntityType>
+        <Association Name="FK__Rulaje__IdCont__3B75D760">
+          <End Role="Cont" Type="Self.Cont" Multiplicity="0..1" />
+          <End Role="Rulaje" Type="Self.Rulaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cont">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rulaje">
+              <PropertyRef Name="IdCont" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rulaje__IdOperat__3C69FB99">
+          <End Role="Operatie" Type="Self.Operatie" Multiplicity="0..1" />
+          <End Role="Rulaje" Type="Self.Rulaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operatie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rulaje">
+              <PropertyRef Name="IdOperatie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mihaiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cont" EntityType="Self.Cont" />
+          <EntitySet Name="Operatie" EntityType="Self.Operatie" />
+          <EntitySet Name="Rulaje" EntityType="Self.Rulaje" />
+          <AssociationSet Name="FK__Rulaje__IdCont__3B75D760" Association="Self.FK__Rulaje__IdCont__3B75D760">
+            <End Role="Cont" EntitySet="Cont" />
+            <End Role="Rulaje" EntitySet="Rulaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rulaje__IdOperat__3C69FB99" Association="Self.FK__Rulaje__IdOperat__3C69FB99">
+            <End Role="Operatie" EntitySet="Operatie" />
+            <End Role="Rulaje" EntitySet="Rulaje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="mihaiEntities">
+          <EntitySetMapping Name="Cont">
+            <EntityTypeMapping TypeName="dbModel.Cont">
+              <MappingFragment StoreEntitySet="Cont">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Simbol" ColumnName="Simbol" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="SIC" ColumnName="SIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operatie">
+            <EntityTypeMapping TypeName="dbModel.Operatie">
+              <MappingFragment StoreEntitySet="Operatie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Numar" ColumnName="Numar" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Doc" ColumnName="Doc" />
+                <ScalarProperty Name="DataDoc" ColumnName="DataDoc" />
+                <ScalarProperty Name="Explicatie" ColumnName="Explicatie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rulaje">
+            <EntityTypeMapping TypeName="dbModel.Rulaje">
+              <MappingFragment StoreEntitySet="Rulaje">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCont" ColumnName="IdCont" />
+                <ScalarProperty Name="IdOperatie" ColumnName="IdOperatie" />
+                <ScalarProperty Name="SumaD" ColumnName="SumaD" />
+                <ScalarProperty Name="SumaC" ColumnName="SumaC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
