@@ -16,7 +16,7 @@ namespace dad_ViziteuMihai
     public partial class databaseEntities : DbContext
     {
         public databaseEntities()
-            : base("name=mihaiEntities")
+            : base("name=databaseEntities")
         {
         }
     
@@ -28,5 +28,6 @@ namespace dad_ViziteuMihai
         public DbSet<Cont> Cont { get; set; }
         public DbSet<Operatie> Operatie { get; set; }
         public DbSet<Rulaje> Rulaje { get; set; }
+        public DbSet<vwBalantaDeVerificare> vwBalantaDeVerificare { get; set; }
     }
 }

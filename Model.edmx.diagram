@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="dbModel.Rulaje" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="dbModel.FK__Rulaje__IdCont__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.FK__Rulaje__IdOperat__3C69FB99" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbModel.vwBalantaDeVerificare" Width="1.5" PointX="5.375" PointY="1.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

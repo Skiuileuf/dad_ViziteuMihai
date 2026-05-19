@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cont">
           <Key>
             <PropertyRef Name="Id" />
@@ -36,6 +36,22 @@
           <Property Name="SumaD" Type="decimal" Precision="16" Scale="4" />
           <Property Name="SumaC" Type="decimal" Precision="16" Scale="4" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'mihai.dbo.vwBalantaDeVerificare' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwBalantaDeVerificare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Simbol" Type="nvarchar" MaxLength="16" />
+          <Property Name="Denumire" Type="nvarchar" MaxLength="255" />
+          <Property Name="SID" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="SIC" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="Rulaj D" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="Rulaj C" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="TSD" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="TSC" Type="decimal" Precision="38" Scale="4" />
+        </EntityType>
         <Association Name="FK__Rulaje__IdCont__3B75D760">
           <End Role="Cont" Type="Self.Cont" Multiplicity="0..1" />
           <End Role="Rulaje" Type="Self.Rulaje" Multiplicity="*" />
@@ -64,6 +80,19 @@
           <EntitySet Name="Cont" EntityType="Self.Cont" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Operatie" EntityType="Self.Operatie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rulaje" EntityType="Self.Rulaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwBalantaDeVerificare" EntityType="Self.vwBalantaDeVerificare" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vwBalantaDeVerificare].[Id] AS [Id], 
+[vwBalantaDeVerificare].[Simbol] AS [Simbol], 
+[vwBalantaDeVerificare].[Denumire] AS [Denumire], 
+[vwBalantaDeVerificare].[SID] AS [SID], 
+[vwBalantaDeVerificare].[SIC] AS [SIC], 
+[vwBalantaDeVerificare].[Rulaj D] AS [Rulaj D], 
+[vwBalantaDeVerificare].[Rulaj C] AS [Rulaj C], 
+[vwBalantaDeVerificare].[TSD] AS [TSD], 
+[vwBalantaDeVerificare].[TSC] AS [TSC]
+FROM [dbo].[vwBalantaDeVerificare] AS [vwBalantaDeVerificare]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Rulaje__IdCont__3B75D760" Association="Self.FK__Rulaje__IdCont__3B75D760">
             <End Role="Cont" EntitySet="Cont" />
             <End Role="Rulaje" EntitySet="Rulaje" />
@@ -73,8 +102,7 @@
             <End Role="Rulaje" EntitySet="Rulaje" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -137,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="mihaiEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="databaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cont" EntityType="Self.Cont" />
           <EntitySet Name="Operatie" EntityType="Self.Operatie" />
           <EntitySet Name="Rulaje" EntityType="Self.Rulaje" />
@@ -149,13 +177,28 @@
             <End Role="Operatie" EntitySet="Operatie" />
             <End Role="Rulaje" EntitySet="Rulaje" />
           </AssociationSet>
+          <EntitySet Name="vwBalantaDeVerificare" EntityType="dbModel.vwBalantaDeVerificare" />
         </EntityContainer>
+        <EntityType Name="vwBalantaDeVerificare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Simbol" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Denumire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="SIC" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="Rulaj_D" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="Rulaj_C" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="TSD" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="TSC" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="mihaiEntities">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="databaseEntities">
           <EntitySetMapping Name="Cont">
             <EntityTypeMapping TypeName="dbModel.Cont">
               <MappingFragment StoreEntitySet="Cont">
@@ -187,6 +230,21 @@
                 <ScalarProperty Name="IdOperatie" ColumnName="IdOperatie" />
                 <ScalarProperty Name="SumaD" ColumnName="SumaD" />
                 <ScalarProperty Name="SumaC" ColumnName="SumaC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwBalantaDeVerificare">
+            <EntityTypeMapping TypeName="dbModel.vwBalantaDeVerificare">
+              <MappingFragment StoreEntitySet="vwBalantaDeVerificare">
+                <ScalarProperty Name="TSC" ColumnName="TSC" />
+                <ScalarProperty Name="TSD" ColumnName="TSD" />
+                <ScalarProperty Name="Rulaj_C" ColumnName="Rulaj C" />
+                <ScalarProperty Name="Rulaj_D" ColumnName="Rulaj D" />
+                <ScalarProperty Name="SIC" ColumnName="SIC" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Simbol" ColumnName="Simbol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ namespace dad_ViziteuMihai.Forms
 {
     public partial class frmBalanta : Form
     {
+
+        databaseEntities ctx = new databaseEntities();
+
         public frmBalanta()
         {
             InitializeComponent();
@@ -19,6 +23,8 @@ namespace dad_ViziteuMihai.Forms
 
         private void frmBalanta_Load(object sender, EventArgs e)
         {
+            ctx.vwBalantaDeVerificare.Load();
+            bsViewBalantaDeVerificare.DataSource = ctx.vwBalantaDeVerificare.Local;
 
             this.reportViewer1.RefreshReport();
         }

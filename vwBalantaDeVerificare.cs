@@ -9,24 +9,19 @@
 
 namespace dad_ViziteuMihai
 {
-    using dad_ViziteuMihai.Forms;
     using System;
     using System.Collections.Generic;
     
-    public partial class Operatie
+    public partial class vwBalantaDeVerificare
     {
-        public Operatie()
-        {
-            this.Rulaje = new myColl<Rulaje>();
-        }
-    
         public int Id { get; set; }
-        public Nullable<int> Numar { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
-        public string Doc { get; set; }
-        public Nullable<System.DateTime> DataDoc { get; set; }
-        public string Explicatie { get; set; }
-    
-        public virtual myColl<Rulaje> Rulaje { get; set; }
+        public string Simbol { get; set; }
+        public string Denumire { get; set; }
+        public Nullable<decimal> SID { get; set; }
+        public Nullable<decimal> SIC { get; set; }
+        public Nullable<decimal> Rulaj_D { get; set; }
+        public Nullable<decimal> Rulaj_C { get; set; }
+        public Nullable<decimal> TSD { get; set; }
+        public Nullable<decimal> TSC { get; set; }
     }
 }
