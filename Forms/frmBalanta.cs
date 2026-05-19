@@ -16,5 +16,11 @@ namespace dad_ViziteuMihai.Forms
         {
             InitializeComponent();
         }
+
+        private void frmBalanta_Load(object sender, EventArgs e)
+        {
+
+            this.reportViewer1.RefreshReport();
+        }
     }
 }
