@@ -22,8 +22,20 @@ namespace dad_ViziteuMihai.Forms
 
         private void frmRulaje_Load(object sender, EventArgs e)
         {
-            dad.Operatie.Include("Rulaje").Load();
-            bindingSource.DataSource = dad.Operatie.Local.ToBindingList();
+            try
+            {
+                dad.Cont.Load();
+                dad.Operatie.Include("Rulaje").Load();
+
+                bsCont.DataSource = dad.Cont.Local;
+                bindingSource.DataSource = dad.Operatie.Local.ToBindingList();
+
+            } catch (Exception ex)
+            {
+                // nu ar trebui sa se intample prea des ayaye
+                MessageBox.Show($"Ups eroare UwU {ex.Message}");
+            }
+
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
@@ -41,5 +53,21 @@ namespace dad_ViziteuMihai.Forms
                 MessageBox.Show($"Datele nu pot fi salvate! {ex.Message}");
             }
         }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // Mananca eroarea
+            // yum yum
+        }
+    }
+
+    public class myColl<T> : System.Collections.ObjectModel.ObservableCollection<T>
+    {
+
     }
 }
