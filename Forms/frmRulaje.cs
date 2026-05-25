@@ -28,7 +28,7 @@ namespace dad_ViziteuMihai.Forms
                 dad.Operatie.Include("Rulaje").Load();
 
                 bsCont.DataSource = dad.Cont.Local;
-                bindingSource.DataSource = dad.Operatie.Local.ToBindingList();
+                bsOperatie.DataSource = dad.Operatie.Local.ToBindingList();
 
             } catch (Exception ex)
             {
@@ -43,9 +43,9 @@ namespace dad_ViziteuMihai.Forms
             try
             {
                 this.Validate();
-                this.bindingSource.EndEdit();
+                this.bsOperatie.EndEdit();
                 dad.SaveChanges();
-                bindingSource.ResetBindings(false);
+                bsOperatie.ResetBindings(false);
                 MessageBox.Show("Datele au fost salvate");
             }
             catch (Exception ex)
